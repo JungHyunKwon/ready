@@ -20,7 +20,7 @@ try {
 					var readyI = ready[i];
 
 					//함수일 때
-					if(typeof ready[i] === 'function') {
+					if(typeof readyI === 'function') {
 						readyI(event);
 					}
 				}
