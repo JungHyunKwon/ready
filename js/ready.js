@@ -9,14 +9,14 @@ try {
 		window.ready = [];
 
 		/**
-		 * @name 콜백
+		 * @name callback
 		 * @param {object} event
 		 * @since 2018-12-14
 		 */
 		function _callback(event) {
 			//배열일 때
 			if(ready) {
-				for(var i = 0, readyLength = ready.length; i < readyLength; i++) {
+				for(var i in ready) {
 					var readyI = ready[i];
 
 					//함수일 때
@@ -24,6 +24,8 @@ try {
 						readyI(event);
 					}
 				}
+
+				ready = undefined;
 			}	
 		}
 		
