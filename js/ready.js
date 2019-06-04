@@ -3,10 +3,20 @@
  * @version 1.0.0
  */
 try {
-	(function() {
+	(function(_toString) {
 		'use strict';
 		
-		window.ready = {};
+		window.ready = [];
+
+		/**
+		 * @name isArray
+		 * @since 2017-12-06
+		 * @param {*} value
+		 * @return {boolean}
+		 */
+		function _isArray(value) {
+			return _toString.call(value) === '[object Array]';
+		}
 
 		/**
 		 * @name callback
@@ -15,14 +25,14 @@ try {
 		 */
 		function _callback(event) {
 			//배열일 때
-			if(ready) {
-				for(var i in ready) {
-					var readyI = ready[i];
+			if(_isArray(ready)) {
+				for(var i = 0, readyLength = ready.length; i < readyLength; i++) {
+					var element = ready[i];
 
 					//함수일 때
-					if(typeof readyI === 'function') {
-						readyI(event);
-					}
+					if(typeof element === 'function') {
+						element(event);
+					}					
 				}
 			}	
 		}
@@ -43,7 +53,7 @@ try {
 			});
 		}
 
-	})();
+	})(Object.prototype.toString);
 }catch(e) {
 	console.error(e);
 }
