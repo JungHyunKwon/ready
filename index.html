@@ -7,9 +7,9 @@
 	<title>ready</title>
 	<script src="js/ready.min.js"></script>
 	<script>
-		ready[0] = function(event) {
+		ready.push(function(event) {
 			console.log(document.readyState);
-		};
+		});
 	</script>
 </head>
 <body>
