@@ -5,7 +5,7 @@
 (function() {
 	'use strict';
 	
-	var _toString = Object.prototype.toString;
+	var toStr = Object.prototype.toString;
 
 	window.ready = [];
 
@@ -15,8 +15,8 @@
 	 * @param {*} value
 	 * @return {boolean}
 	 */
-	function _isArray(value) {
-		return _toString.call(value) === '[object Array]';
+	function isArray(value) {
+		return toStr.call(value) === '[object Array]';
 	}
 
 	/**
@@ -24,15 +24,15 @@
 	 * @param {object} event
 	 * @since 2018-12-14
 	 */
-	function _callback(event) {
+	function callback(event) {
 		//배열일 때
-		if(_isArray(ready)) {
+		if(isArray(ready)) {
 			for(var i = 0, readyLength = ready.length; i < readyLength; i++) {
-				var element = ready[i];
+				var value = ready[i];
 
 				//함수일 때
-				if(typeof element === 'function') {
-					element(event);
+				if(typeof value === 'function') {
+					value(event);
 				}					
 			}
 		}	
@@ -40,16 +40,14 @@
 	
 	//addEventListener가 있을 때
 	if(document.addEventListener) {
-		document.addEventListener('DOMContentLoaded', function(event) {
-			_callback(event);
-		}, false);
+		document.addEventListener('DOMContentLoaded', callback, false);
 	
 	//attachEvent가 있을 때
 	}else if(document.attachEvent) {
 		document.attachEvent('onreadystatechange', function(event) {
 			//문서가 준비되었을 때
 			if(document.readyState === 'interactive') {
-				_callback(event);
+				callback(event);
 			}
 		});
 	}
